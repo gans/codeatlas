@@ -1,16 +1,10 @@
 # CodeAtlas MVP
 
-CodeAtlas converts a local Git commit into a reusable code graph in Parquet, publishes it to MinIO, and queries it through Trino using a PostgreSQL-backed Apache Hive Metastore. The ACL plugin reads the graph independently.
+CodeAtlas turns a Git commit into a code graph you can query with Trino. [Optional local AI](#optional-local-ai) uses graph evidence to suggest what to review, such as whether a class-level access rule covers a method.
 
 **CodeAtlas is a test MVP for local evaluation. It is not suitable for production workloads.** The reference stack uses public fixture credentials, and graph updates can leave readers with a partially published snapshot. See the [security review](SECURITY_REVIEW.md) for the known issues in the tested configuration.
 
 If you run CodeAtlas, you are responsible for deciding whether it is appropriate for your use, securing your environment, protecting the source code you process, and verifying results before acting on them. You assume the risks of using it to the extent permitted by applicable law. The [Apache License 2.0](LICENSE) sets out the warranty disclaimer and limits on contributor liability in sections 7 and 8. Third-party components remain subject to their own licenses.
-
-## How AI helps with code review
-
-Suppose a reviewer asks, “Where should I check access control first?” The [optional local AI tools](#optional-local-ai) let you search for relevant functions by name and file path, then pass selected graph records or ACL findings to Qwen3 for an explanation. Each finding includes a file and line so the reviewer can check the source.
-
-In the sample repository, both the Java and Kotlin classes carry `@RequiresAcl`, but each has an `unguarded()` method without a direct annotation. Given those records, the model can suggest a focused next step: check whether the authorization framework applies the class annotation to those methods before deciding they need a fix.
 
 ## Run the reference environment
 
