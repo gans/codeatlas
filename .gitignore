@@ -221,3 +221,14 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Local CodeAtlas artifacts
+.venv/
+__pycache__/
+.pytest_cache/
+*.pyc
+data/
+.fixture-repo/
+verified/
+.env
+.verified-venv/
